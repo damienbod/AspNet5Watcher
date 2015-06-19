@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc;
@@ -17,10 +18,9 @@ namespace AspNet5Watcher.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<AlarmMessage> Get()
         {
-            _searchRepository.AddDocument(new AlarmMessage {  Message = "test", AlarmType = "Info" });
-            return new string[] { "value1", "value2" };
+            return _searchRepository.Search();
         }
 
         [HttpPost]
@@ -32,6 +32,7 @@ namespace AspNet5Watcher.Controllers
                 return new HttpStatusCodeResult(400);
             }
 
+            alarm.Id = Guid.NewGuid();
             _searchRepository.AddDocument(alarm);
             return new HttpStatusCodeResult(200);
 

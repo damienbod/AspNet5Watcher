@@ -28,7 +28,12 @@ namespace AspNet5Watcher.SearchEngine
                 .Type("alarm")
                 .Refresh()
             );
+        }
 
+        public List<AlarmMessage> Search()
+        {
+            // TODO the search returns nothing...
+            return client.Search<AlarmMessage>(i => i.MatchAll()).Documents.ToList();
         }
     }
 }
