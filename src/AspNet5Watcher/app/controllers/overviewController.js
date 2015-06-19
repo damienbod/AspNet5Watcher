@@ -15,7 +15,7 @@
 
 	function OverviewController($scope, $log, alarmsService) {
 		$log.info("overviewController called");
-		$scope.message = "Overview";
+		$scope.message = "Create Alarm";
 
 	}
 })();

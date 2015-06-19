@@ -8,7 +8,7 @@
             	$stateProvider
                     .state("home", { abstract: true, url: "/home", templateUrl: "/templates/home.html" })
                         .state("overview", {
-                        	parent: "home", url: "/overview", templateUrl: "/templates/overview.html", controller: "OverviewController",
+                        	parent: "home", url: "/overview", templateUrl: "/templates/overview.html", controller: "overviewController",
                         	
                         })
         }
