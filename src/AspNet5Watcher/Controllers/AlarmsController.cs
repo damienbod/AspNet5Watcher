@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc;
 
 namespace AspNet5Watcher.Controllers
 {
@@ -22,18 +23,18 @@ namespace AspNet5Watcher.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpPost]
-        public void Post([FromBody]AlarmMessage alarm)
+        [Route("AddAlarm")]
+        public IActionResult Post([FromBody]AlarmMessage alarm)
         {
+            if(alarm == null)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+
             _searchRepository.AddDocument(alarm);
+            return new HttpStatusCodeResult(200);
+
         }
     }
 }

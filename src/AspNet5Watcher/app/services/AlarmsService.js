@@ -1,16 +1,19 @@
 ﻿(function () {
-	'use strict';
+    'use strict';
 
 	function AlarmsService($http, $log, $q) {
-
 	    $log.info("alarmsService called");
 
-	    var addAlarm = function (alarm) {
+	    var AddAlarm = function (alarm) {
 	        var deferred = $q.defer();
+
+	        console.log("addAlarm started");
+	        console.log(alarm);
+
 	        $http({
-	            url: 'api/alarms/addAlarm',
+	            url: 'api/alarms/AddAlarm',
 	            method: "POST",
-	            data: project
+	            data: alarm
 	        }).success(function (data) {
 	            deferred.resolve(data);
 	        }).error(function (error) {
@@ -20,7 +23,7 @@
 	    };
 
 		return {
-		    addAlarm: addAlarm
+		    AddAlarm: AddAlarm
 		}
 	}
 
@@ -31,6 +34,7 @@
 		[
 			"$http",
 			"$log",
+            "$q",
 			AlarmsService
 		]
 	);
