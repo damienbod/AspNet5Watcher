@@ -1,14 +1,14 @@
 ﻿(function () {
 	'use strict';
 
-	function AlarmsService($http, $log) {
+	function AlarmsService($http, $log, $q) {
 
 	    $log.info("alarmsService called");
 
 	    var addAlarm = function (alarm) {
-	        var deferred = this.q.defer();
-	        this.http({
-	            url: this.apiBaseUrl + '/api/alarms/addAlarm',
+	        var deferred = $q.defer();
+	        $http({
+	            url: 'api/alarms/addAlarm',
 	            method: "POST",
 	            data: project
 	        }).success(function (data) {

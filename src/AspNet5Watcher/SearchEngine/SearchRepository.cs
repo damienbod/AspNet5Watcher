@@ -26,7 +26,6 @@ namespace AspNet5Watcher.SearchEngine
             client.Index<AlarmMessage>(alarm, i => i
                 .Index("alarms")
                 .Type("alarm")
-                .Id(alarm.Id)
                 .Refresh()
             );
 

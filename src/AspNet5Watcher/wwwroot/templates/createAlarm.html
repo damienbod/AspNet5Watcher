@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="username">Alarm Type</label>
                         <div class="col-sm-9">
-                            <input id="alarmType" class="form-control" type="text" placeholder="info" />
+                            <input id="alarmType" class="form-control" type="text" placeholder="info" ng-model="AlarmType" />
                         </div>
                     </div>
 
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label class="col-sm-3  control-label" for="password">Message</label>
                         <div class="col-sm-9">
-                            <textarea id="text" class="form-control" type="text" placeholder="message"></textarea>
+                            <textarea id="text" class="form-control" type="text" placeholder="message" ng-model="Message"></textarea>
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"></label>
                         <div class="col-xs-5">
-                            <button class="btn btn-primary" type="submit" >Create Alarm</button>
+                            <button class="btn btn-primary" type="submit" ng-click="CreateNewAlarm()">Create Alarm</button>
                         </div>
                     </div>
 

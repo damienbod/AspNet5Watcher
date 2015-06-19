@@ -18,7 +18,7 @@ namespace AspNet5Watcher.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-           // _searchRepository.AddDocument(new AlarmMessage { Id = 1, Message = "test", AlarmType = "Info" });
+            _searchRepository.AddDocument(new AlarmMessage {  Message = "test", AlarmType = "Info" });
             return new string[] { "value1", "value2" };
         }
 
