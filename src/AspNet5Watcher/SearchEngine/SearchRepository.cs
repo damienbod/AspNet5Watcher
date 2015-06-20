@@ -18,6 +18,14 @@ namespace AspNet5Watcher.SearchEngine
                 defaultIndex: "my-application"
             );
 
+            settings.MapDefaultTypeIndices(d => d
+               .Add(typeof(AlarmMessage), "alarms")
+            );
+
+            settings.MapDefaultTypeNames(d => d
+               .Add(typeof(AlarmMessage), "alarm")
+            );
+
             client = new ElasticClient(settings);
 
         }
@@ -30,10 +38,11 @@ namespace AspNet5Watcher.SearchEngine
             );
         }
 
-        public List<AlarmMessage> Search()
+        public List<AlarmMessage> SearchForLastTenCriticalAlarms()
         {
             // TODO the search returns nothing...
-            return client.Search<AlarmMessage>(i => i.MatchAll()).Documents.ToList();
+            var results = client.Search<AlarmMessage>(i => i.Query(q => q.Term(p => p.AlarmType, "critical")).SortDescending("created"));
+            return results.Documents.ToList();
         }
     }
 }

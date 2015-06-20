@@ -9,5 +9,7 @@ namespace AspNet5Watcher.SearchEngine
         public string Message { get; set; }
 
         public string AlarmType { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace AspNet5Watcher.Controllers
         [HttpGet]
         public IEnumerable<AlarmMessage> Get()
         {
-            return _searchRepository.Search();
+            return _searchRepository.SearchForLastTenCriticalAlarms();
         }
 
         [HttpPost]
@@ -33,6 +33,7 @@ namespace AspNet5Watcher.Controllers
             }
 
             alarm.Id = Guid.NewGuid();
+            alarm.Created = DateTime.UtcNow;
             _searchRepository.AddDocument(alarm);
             return new HttpStatusCodeResult(200);
 
