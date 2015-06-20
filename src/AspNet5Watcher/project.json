@@ -3,16 +3,16 @@
     "version": "1.0.0-*",
 
     "dependencies": {
-        "Microsoft.AspNet.Mvc": "6.0.0-beta4",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta4",
-        "Microsoft.AspNet.Server.WebListener": "1.0.0-beta4",
-        "Microsoft.AspNet.StaticFiles": "1.0.0-beta4",
+        "Microsoft.AspNet.Mvc": "6.0.0-beta6-14142",
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta6-11947",
+        "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6-12330",
+        "Microsoft.AspNet.StaticFiles": "1.0.0-beta6-11998",
         "NEST.Watcher": "1.0.0-beta1",
-        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta4"
+        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta6-14142"
     },
 
     "commands": {
-        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000"
+        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000" 
     },
 
     "frameworks": {
