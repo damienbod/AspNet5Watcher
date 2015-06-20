@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc;
 
 namespace AspNet5Watcher.Controllers
 {
@@ -18,7 +17,15 @@ namespace AspNet5Watcher.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<AlarmMessage> Get()
+        [Route("LastTenAlarms")]
+        public IEnumerable<AlarmMessage> GetLast10Alarms()
+        {
+            return _searchRepository.SearchForLastTenAlarms();
+        }
+
+        [HttpGet]
+        [Route("LastTenCritcalAlarms")]
+        public IEnumerable<AlarmMessage> GetLastTenCritcalAlarms()
         {
             return _searchRepository.SearchForLastTenCriticalAlarms();
         }

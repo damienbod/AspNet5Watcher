@@ -5,36 +5,36 @@ using System.Threading.Tasks;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
+using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Runtime;
 
 namespace AspNet5Watcher
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        private IConfiguration _configuration;
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
+            _configuration = new ConfigurationBuilder(appEnv.ApplicationBasePath)
+             .AddEnvironmentVariables()
+             .AddJsonFile("config.json")
+             .Build();
         }
 
-        // This method gets called by a runtime.
-        // Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddScoped<SearchRepository, SearchRepository>();
+
+            services.AddInstance(_configuration);
         }
 
-        // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Configure the HTTP request pipeline.
-            app.UseStaticFiles();
-
-            // Add MVC to the request pipeline.
-            app.UseMvc();
-            // Add the following route for porting Web API 2 controllers.
-            // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            app.UseStaticFiles();       
+            app.UseMvc();         
         }
     }
 }
