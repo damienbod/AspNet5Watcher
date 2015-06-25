@@ -23,6 +23,17 @@
 	        this.alarmsService.AddAlarm(data);
 	    };
 
+	    AlarmsController.prototype.StartWatcher = function () {
+	        console.log("StartWatcher event");
+	        this.alarmsService.StartWatcher();
+	    };
+
+	    AlarmsController.prototype.DeleteWatcher = function () {
+	        console.log("DeleteWatcher event");
+	        this.alarmsService.DeleteWatcher();
+	    };
+
+
 	    return AlarmsController;
 	})();
 

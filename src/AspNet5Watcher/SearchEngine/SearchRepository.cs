@@ -43,5 +43,17 @@ namespace AspNet5Watcher.SearchEngine
             var results = client.Search<AlarmMessage>(i => i.Query(q => q.MatchAll()).SortDescending("created"));
             return results.Documents.ToList();
         }
+
+        public void StartElasticsearchWatcher()
+        {
+            // Check if the watcher exists
+           
+            // check and start
+        }
+
+        public void DeleteWatcher()
+        {
+
+        }
     }
 }
