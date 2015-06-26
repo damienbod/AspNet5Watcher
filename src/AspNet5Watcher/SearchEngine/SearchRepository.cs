@@ -44,11 +44,51 @@ namespace AspNet5Watcher.SearchEngine
             return results.Documents.ToList();
         }
 
+        // {
+        //  "trigger" : {
+        //    "schedule" : {
+        //      "interval" : "10s"
+        //    }
+        //  },
+        //  "input": {
+        //    "search": {
+        //      "request": {
+        //        "body": {
+        //          "query": {
+        //            "term": {
+        //              "alarmType": {
+        //                "value": "critical"
+        //              }
+        //            }
+        //          }
+        //        }
+        //      }
+        //    }
+        //  },
+        //  "condition": {
+        //    "always": {}
+        //  },
+        //  "actions": {
+        //    "webAction": {
+        //      "webhook": { 
+        //          "port": 5000,
+        //          "host": "localhost",
+        //          "path": "/api/WatcherEvents/CriticalAlarm",
+        //          "method": "post",
+        //          "headers": {
+        //            "Content-Type": "application/json;charset=utf-8"
+        //          },
+        //          "body": "\"{{ctx.payload.hits.total}}\""       
+        //      }
+        //    }
+        //  }
+        //}
         public void StartElasticsearchWatcher()
         {
             var header = new Dictionary<string, string>();
             header.Add("Content-Type", "application/json;charset=utf-8");
 
+            // NEST bug WebhookAction does not work, should remove the request item from the json result
             var response = client.PutWatch("critical-alarm-watch", p => p
                 .Trigger(t => t
                     .Schedule(s => s
@@ -73,12 +113,11 @@ namespace AspNet5Watcher.SearchEngine
                         Request = new WatcherHttpRequest
                         {
                             Method = HttpMethod.Post,
-                            Host= "http://localhost",
+                            Host= "localhost",
                             Port= 5000,
-                            Path= "api/WatcherEvents/CriticalAlarm",
+                            Path= "/api/WatcherEvents/CriticalAlarm",
                             Headers= header,
-                            Body= "{{ctx.payload.hits}}"
-
+                            Body= "\"{{ctx.payload.hits.total}}\""
                         }
                     }
                 ))

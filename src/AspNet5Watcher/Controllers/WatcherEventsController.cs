@@ -10,6 +10,7 @@ namespace AspNet5Watcher.Controllers
     public class WatcherEventsController
     {
         private SearchRepository _searchRepository;
+        private static long _criticalAlarmsCount = 0;
 
         public WatcherEventsController(SearchRepository searchRepository)
         {
@@ -37,14 +38,15 @@ namespace AspNet5Watcher.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("CriticalAlarm")]
-        public IActionResult Post([FromBody]object alarms)
-        {
-            if (alarms == null)
+        public IActionResult Post([FromBody]int countNewCriticalAlarms)
+        {  
+            if (countNewCriticalAlarms != _criticalAlarmsCount )
             {
-                return new HttpStatusCodeResult(400);
+                var newCriticalAlarmsCount = countNewCriticalAlarms - _criticalAlarmsCount;
+                _criticalAlarmsCount = countNewCriticalAlarms;
+                // do something
             }
 
-            // TODO send this to the UI
             return new HttpStatusCodeResult(200);
 
         }
