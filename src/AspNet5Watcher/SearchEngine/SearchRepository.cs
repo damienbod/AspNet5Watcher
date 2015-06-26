@@ -88,7 +88,12 @@ namespace AspNet5Watcher.SearchEngine
             var header = new Dictionary<string, string>();
             header.Add("Content-Type", "application/json;charset=utf-8");
 
+            startElasticsearchWatcherClient();
+            return;
+
+            // TODO remove quick hack from above
             // NEST bug WebhookAction does not work, should remove the request item from the json result
+            // interval problem as well
             var response = client.PutWatch("critical-alarm-watch", p => p
                 .Trigger(t => t
                     .Schedule(s => s
@@ -124,9 +129,17 @@ namespace AspNet5Watcher.SearchEngine
            );
         }
 
-        public void DeleteWatcher()
+        private void startElasticsearchWatcherClient()
         {
+            System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+            var response = httpClient.PutAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch",
+                new System.Net.Http.StringContent("{\"trigger\":{\"schedule\":{\"interval\":\"10s\"}},\"input\":{\"search\":{\"request\":{\"body\":{\"query\":{\"term\":{\"alarmType\":{\"value\":\"critical\"}}}}}}},\"condition\":{\"always\":{}},\"actions\":{\"webAction\":{\"webhook\":{\"port\":5000,\"host\":\"localhost\",\"path\":\"/api/WatcherEvents/CriticalAlarm\",\"method\":\"post\",\"headers\":{\"Content-Type\":\"application/json;charset=utf-8\"},\"body\":\"\"\"{ { ctx.payload.hits.total } }\"\"\"}}}}"));
+        }
 
+        public async void DeleteWatcher()
+        {
+            System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+            var response = await httpClient.DeleteAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch");
         }
     }
 }
