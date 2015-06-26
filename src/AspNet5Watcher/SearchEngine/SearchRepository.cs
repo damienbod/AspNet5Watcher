@@ -92,7 +92,7 @@ namespace AspNet5Watcher.SearchEngine
             return;
 
             // TODO remove quick hack from above
-            // NEST bug WebhookAction does not work, should remove the request item from the json result
+            // NEST bug WebhookAction does not work, still beta1 version, should remove the request item from the json result
             // interval problem as well
             var response = client.PutWatch("critical-alarm-watch", p => p
                 .Trigger(t => t
@@ -132,8 +132,11 @@ namespace AspNet5Watcher.SearchEngine
         private void startElasticsearchWatcherClient()
         {
             System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
-            var response = httpClient.PutAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch",
-                new System.Net.Http.StringContent("{\"trigger\":{\"schedule\":{\"interval\":\"10s\"}},\"input\":{\"search\":{\"request\":{\"body\":{\"query\":{\"term\":{\"alarmType\":{\"value\":\"critical\"}}}}}}},\"condition\":{\"always\":{}},\"actions\":{\"webAction\":{\"webhook\":{\"port\":5000,\"host\":\"localhost\",\"path\":\"/api/WatcherEvents/CriticalAlarm\",\"method\":\"post\",\"headers\":{\"Content-Type\":\"application/json;charset=utf-8\"},\"body\":\"\"\"{ { ctx.payload.hits.total } }\"\"\"}}}}"));
+            var content = new System.Net.Http.StringContent("{\"trigger\":{\"schedule\":{\"interval\":\"10s\"}},\"input\":{\"search\":{\"request\":{\"body\":{\"query\":{\"term\":{\"alarmType\":{\"value\":\"critical\"}}}}}}},\"condition\":{\"always\":{}},\"actions\":{\"webAction\":{\"webhook\":{\"port\":5000,\"host\":\"localhost\",\"path\":\"/api/WatcherEvents/CriticalAlarm\",\"method\":\"post\",\"headers\":{\"Content-Type\":\"application/json;charset=utf-8\"},\"body\":\"{{ctx.payload.hits.total}}\"}}}}");
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = httpClient.PutAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch", content).Result;
+
         }
 
         public async void DeleteWatcher()
