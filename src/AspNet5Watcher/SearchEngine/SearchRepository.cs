@@ -46,9 +46,43 @@ namespace AspNet5Watcher.SearchEngine
 
         public void StartElasticsearchWatcher()
         {
-            // Check if the watcher exists
-           
-            // check and start
+            var header = new Dictionary<string, string>();
+            header.Add("Content-Type", "application/json;charset=utf-8");
+
+            var response = client.PutWatch("critical-alarm-watch", p => p
+                .Trigger(t => t
+                    .Schedule(s => s
+                        .Hourly(h => h
+                            .Minute(0, 20)
+                        )
+                    )
+                )
+                .Input(i => i
+                    .Search(s => s
+                        .Request(r => r
+                            .Body<AlarmMessage>(b => b
+                                .Query(q => q.Term(qt => qt.AlarmType, "critical"))
+                            )
+                        )
+                    )
+                )
+                .Condition(c => c.Always())
+                .Actions(a => a.Add("webAction", 
+                    new WebhookAction
+                    {
+                        Request = new WatcherHttpRequest
+                        {
+                            Method = HttpMethod.Post,
+                            Host= "http://localhost",
+                            Port= 5000,
+                            Path= "api/WatcherEvents/CriticalAlarm",
+                            Headers= header,
+                            Body= "{{ctx.payload.hits}}"
+
+                        }
+                    }
+                ))
+           );
         }
 
         public void DeleteWatcher()

@@ -3,7 +3,7 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "Elasticsearch.Net/1.5.1": {
+      "Elasticsearch.Net/1.6.1": {
         "compile": {
           "lib/net45/Elasticsearch.Net.dll": {}
         },
@@ -1122,10 +1122,10 @@
           "lib/dnx451/Microsoft.Net.WebSockets.dll": {}
         }
       },
-      "NEST/1.5.1": {
+      "NEST/1.6.1": {
         "dependencies": {
-          "Elasticsearch.Net": "1.5.1",
-          "Newtonsoft.Json": "6.0.1"
+          "Elasticsearch.Net": "1.6.1",
+          "Newtonsoft.Json": "[7.0, 8.0)"
         },
         "compile": {
           "lib/net45/Nest.dll": {}
@@ -1145,7 +1145,7 @@
           "lib/net45/Nest.Watcher.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1-beta1": {
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
         },
@@ -1175,11 +1175,11 @@
     }
   },
   "libraries": {
-    "Elasticsearch.Net/1.5.1": {
-      "sha512": "nvyWor7OhsJLnsECeadlpRou3vI/OZX92c8CLGa0IuxSeOfwn+bq3gcm//dwh0Q3v7bHDMwYcVzh2JrRzqXxSA==",
+    "Elasticsearch.Net/1.6.1": {
+      "sha512": "D2/qaoTu2MqnAkBBKF857QGsNeW5K6mJY/GbLnPRw9xAxAyupqsNN6wkmvLULVSFZo+UlDM8omo3qTefPy7k1A==",
       "files": [
-        "Elasticsearch.Net.1.5.1.nupkg",
-        "Elasticsearch.Net.1.5.1.nupkg.sha512",
+        "Elasticsearch.Net.1.6.1.nupkg",
+        "Elasticsearch.Net.1.6.1.nupkg.sha512",
         "Elasticsearch.Net.nuspec",
         "lib/Elasticsearch.Net.dll",
         "lib/Elasticsearch.Net.pdb",
@@ -2072,11 +2072,11 @@
         "lib/net451/Microsoft.Net.WebSockets.xml"
       ]
     },
-    "NEST/1.5.1": {
-      "sha512": "95+CdmTr3x/F8BcVMbsRwILCX+UHdVvXDwIx2c0/k5lI8HJBMGTZ1oyLC4Oh9Ie3T9/+H31RngjQo5Kmh2Kfgg==",
+    "NEST/1.6.1": {
+      "sha512": "BJqnNtGGWBkey93/uSiCPWG+SVE9A6uYP1cmRvwC2QkxHTX7o1Zan5r3j9OOrtsQeJfJUjiDsf0rA8a2ie5qXQ==",
       "files": [
-        "NEST.1.5.1.nupkg",
-        "NEST.1.5.1.nupkg.sha512",
+        "NEST.1.6.1.nupkg",
+        "NEST.1.6.1.nupkg.sha512",
         "NEST.nuspec",
         "lib/Nest.dll",
         "lib/Nest.pdb",
@@ -2106,11 +2106,11 @@
         "lib/net45/Nest.Watcher.XML"
       ]
     },
-    "Newtonsoft.Json/6.0.6": {
-      "sha512": "w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
+    "Newtonsoft.Json/7.0.1-beta1": {
+      "sha512": "eh9Z/FYVfAjFevLhAYcVenlVFyXD89f0tZbYBbIkMn7kyCeyKibOdnbVg7XoNiJP1vskSHzW5R2hxlD7TsS2nw==",
       "files": [
-        "Newtonsoft.Json.6.0.6.nupkg",
-        "Newtonsoft.Json.6.0.6.nupkg.sha512",
+        "Newtonsoft.Json.7.0.1-beta1.nupkg",
+        "Newtonsoft.Json.7.0.1-beta1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -2120,8 +2120,6 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll",
@@ -2164,7 +2162,8 @@
       "Microsoft.AspNet.Mvc.Core >= 6.0.0-beta6-14142",
       "Microsoft.Framework.Configuration >= 1.0.0-beta6-11500",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta6-11500",
-      "Microsoft.Framework.Runtime >= 1.0.0-beta6-12099"
+      "Microsoft.Framework.Runtime >= 1.0.0-beta6-12099",
+      "NEST >= 1.6.1"
     ],
     "DNX,Version=v4.5.1": []
   }

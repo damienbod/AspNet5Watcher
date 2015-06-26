@@ -37,9 +37,9 @@ namespace AspNet5Watcher.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("CriticalAlarm")]
-        public IActionResult Post([FromBody]AlarmMessage alarm)
+        public IActionResult Post([FromBody]object alarms)
         {
-            if (alarm == null)
+            if (alarms == null)
             {
                 return new HttpStatusCodeResult(400);
             }

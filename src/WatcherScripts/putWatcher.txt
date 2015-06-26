@@ -1,0 +1,47 @@
+http://localhost:9200/_watcher/watch/critical-alarm-watch
+
+Accept: application/json
+Content-Type: application/json
+Host: localhost:9200
+Content-Length: 827
+Connection: Keep-Alive
+
+{
+  "trigger" : {
+    "schedule" : {
+      "interval" : "10s"
+    }
+  },
+  "input": {
+    "search": {
+      "request": {
+        "body": {
+          "query": {
+            "term": {
+              "alarmType": {
+                "value": "critical"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "condition": {
+    "always": {}
+  },
+  "actions": {
+    "webAction": {
+      "webhook": { 
+          "port": 5000,
+          "host": "localhost",
+          "path": "/api/WatcherEvents/CriticalAlarm",
+          "method": "post",
+          "headers": {
+            "Content-Type": "application/json;charset=utf-8"
+          },
+          "body": "{{ctx.payload.hits}}"       
+      }
+    }
+  }
+}
