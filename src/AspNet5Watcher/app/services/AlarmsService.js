@@ -43,7 +43,7 @@
 	    var DeleteWatcher = function (alarm) {
 	        var deferred = $q.defer();
 
-	        console.log("StartWatcher begin");
+	        console.log("DeleteWatcher begin");
 	        console.log(alarm);
 
 	        $http({
