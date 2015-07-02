@@ -1,5 +1,7 @@
-﻿using AspNet5Watcher.SearchEngine;
+﻿//using AspNet5Watcher.Hubs;
+using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Mvc;
+//using Microsoft.AspNet.SignalR;
 
 namespace AspNet5Watcher.Controllers
 {
@@ -9,8 +11,11 @@ namespace AspNet5Watcher.Controllers
         private SearchRepository _searchRepository;
         private static long _criticalAlarmsCount = 0;
 
-        public WatcherEventsController(SearchRepository searchRepository)
+      //  private IHubContext _hubContext;
+
+        public WatcherEventsController(SearchRepository searchRepository)//, IHubContext<AlarmsHub> hubContext)
         {
+           // _hubContext = hubContext;
             _searchRepository = searchRepository;
         }
 

@@ -11,6 +11,10 @@
                             parent: "home", url: "/createAlarm", templateUrl: "/templates/createAlarm.html", controller: "alarmsController",
                         	
                         })
+                    .state("alarms", {
+                         url: "/alarms", templateUrl: "/templates/alarms.html", controller: "alarmsController",
+
+                    })
         }
 	]
     );
