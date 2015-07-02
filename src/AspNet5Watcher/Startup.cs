@@ -26,15 +26,20 @@ namespace AspNet5Watcher
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<SearchRepository, SearchRepository>();
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+            });
 
+            services.AddScoped<SearchRepository, SearchRepository>();
             services.AddInstance(_configuration);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();       
-            app.UseMvc();         
+            app.UseMvc();
+            app.UseSignalR();
         }
     }
 }

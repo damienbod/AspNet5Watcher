@@ -13,7 +13,8 @@
         "Microsoft.Framework.Configuration.Json": "1.0.0-beta6-11500",
         "Microsoft.Framework.Runtime": "1.0.0-beta6-12099",
         "NEST": "1.6.1",
-        "Microsoft.Net.Http": "2.2.29"
+        "Microsoft.Net.Http": "2.2.29",
+        "Microsoft.AspNet.SignalR.Server": "3.0.0-*"
     },
 
     "commands": {
