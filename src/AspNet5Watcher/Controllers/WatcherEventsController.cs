@@ -1,7 +1,6 @@
-﻿//using AspNet5Watcher.Hubs;
+﻿using AspNet5Watcher.Hubs;
 using AspNet5Watcher.SearchEngine;
-using Microsoft.AspNet.Mvc;
-//using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.Mvc;using Microsoft.AspNet.SignalR;
 
 namespace AspNet5Watcher.Controllers
 {
@@ -11,11 +10,11 @@ namespace AspNet5Watcher.Controllers
         private SearchRepository _searchRepository;
         private static long _criticalAlarmsCount = 0;
 
-      //  private IHubContext _hubContext;
+        private AlarmsHub _alarmsHub;
 
-        public WatcherEventsController(SearchRepository searchRepository)//, IHubContext<AlarmsHub> hubContext)
+        public WatcherEventsController(SearchRepository searchRepository, AlarmsHub alarmsHub)
         {
-           // _hubContext = hubContext;
+            _alarmsHub = alarmsHub;
             _searchRepository = searchRepository;
         }
 
@@ -28,7 +27,10 @@ namespace AspNet5Watcher.Controllers
             {
                 var newCriticalAlarmsCount = countNewCriticalAlarms - _criticalAlarmsCount;
                 _criticalAlarmsCount = countNewCriticalAlarms;
-                // TODO use
+
+                _alarmsHub.SendTotalAlarmsCount(countNewCriticalAlarms);
+
+                // send last x alarms to the ui
             }
 
             return new HttpStatusCodeResult(200);
