@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AspNet5Watcher.Hubs;
+﻿using AspNet5Watcher.Hubs;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -32,7 +28,6 @@ namespace AspNet5Watcher
                 options.Hubs.EnableDetailedErrors = true;
             });
 
-            services.AddSingleton(typeof(AlarmsHub));
             services.AddScoped<SearchRepository, SearchRepository>();
             services.AddInstance(_configuration);
         }
@@ -41,7 +36,7 @@ namespace AspNet5Watcher
         {
             app.UseStaticFiles();       
             app.UseMvc();
-          //  app.UseSignalR();
+            app.UseSignalR();
         }
     }
 }

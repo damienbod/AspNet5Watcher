@@ -3,28 +3,20 @@
     "version": "1.0.0-*",
 
     "dependencies": {
+         "Microsoft.AspNet.Mvc": "6.0.0-beta5",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
+    "Kestrel": "1.0.0-beta5",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
+        "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
 
-        "Microsoft.AspNet.Mvc": "6.0.0-beta6-14142",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta6-11947",
-        "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6-12330",
-        "Microsoft.AspNet.Session": "1.0.0-beta6-10485",
-        "Microsoft.AspNet.StaticFiles": "1.0.0-beta6-11998",
         "NEST.Watcher": "1.0.0-beta1",
-        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta6-14142",
-        "Microsoft.Framework.Configuration": "1.0.0-beta6-11500",
-        "Microsoft.Framework.Configuration.Json": "1.0.0-beta6-11500",
-        "Microsoft.Framework.Runtime": "1.0.0-beta6-12099",
+        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta5",
+        "Microsoft.Framework.Configuration": "1.0.0-beta5",
+        "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
+        "Microsoft.Framework.Runtime": "1.0.0-beta5",
         "NEST": "1.6.1",
         "Microsoft.Net.Http": "2.2.29",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta6-13169",
-        "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-beta4",
-        "Newtonsoft.Json": "7.0.1",
-        "Microsoft.Framework.Caching.Distributed": "1.0.0-beta5-11363",
-        "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta6-12507",
-        "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta5-11337",
-        "Microsoft.Framework.Logging.Console": "1.0.0-beta6-11548",
-        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta6-12656"
-
+        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta5"
     },
 
     "commands": {

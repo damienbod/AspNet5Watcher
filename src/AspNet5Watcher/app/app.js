@@ -1,5 +1,5 @@
 ﻿(function () {
-	var mainApp = angular.module("mainApp", ["ui.router"]);
+    var mainApp = angular.module("mainApp", ["ui.router", "SignalR"]);
 
 	mainApp.config(["$stateProvider", "$urlRouterProvider",
 		function ($stateProvider, $urlRouterProvider) {
@@ -12,7 +12,7 @@
                         	
                         })
                     .state("alarms", {
-                         url: "/alarms", templateUrl: "/templates/alarms.html", controller: "alarmsController",
+                        url: "/alarms", templateUrl: "/templates/alarms.html", controller: "alarmsDisplayController",
 
                     })
         }
