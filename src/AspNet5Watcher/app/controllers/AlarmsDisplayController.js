@@ -25,7 +25,12 @@
 	                    $rootScope.AlarmsCount = count;
 	                    $rootScope.$apply();
 	                    console.log("Recieved SendTotalAlarmsCount:" + count);
-	                }
+	                },
+	                'sendlasttencriticalalarms': function (lasttenalarms) {
+	                    $rootScope.LastTenCriticalAlarms = lasttenalarms;
+	                    $rootScope.$apply();
+	                    console.log(lasttenalarms);
+	                },
 	            },
 
 	            //handle connection error

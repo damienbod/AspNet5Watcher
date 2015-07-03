@@ -46,7 +46,7 @@ namespace AspNet5Watcher.Controllers
 
                 _alarmsHub.Clients.All.sendtotalalarmscount(countNewCriticalAlarms);
 
-                // send last x alarms to the ui
+                _alarmsHub.Clients.All.sendlasttencriticalalarms(_searchRepository.SearchForLastTenCriticalAlarms());
             }
 
             return new HttpStatusCodeResult(200);
