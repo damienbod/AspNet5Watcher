@@ -1216,7 +1216,7 @@
           "lib/net45/Nest.dll": {}
         }
       },
-      "NEST.Watcher/1.0.0-beta1": {
+      "NEST.Watcher/1.0.0-beta2": {
         "dependencies": {
           "NEST": "1.5.1"
         },
@@ -2384,21 +2384,15 @@
         "NEST.nuspec"
       ]
     },
-    "NEST.Watcher/1.0.0-beta1": {
-      "sha512": "1JEZw6hJv8fkpiD27ukm+2j3NFsi/QysZM8xG3bFSgl9wl6dlb9YDRnY/hQ8c/B2Ed9NZbamTHUWVaHlWOFBRw==",
+    "NEST.Watcher/1.0.0-beta2": {
+      "sha512": "AgllHUo1bSgTB6ATC0zERq45gvrIUOToMczhOv70J08MVQGUyeU4nxImIg/I5LdwiytJF84ISvpuqskI7PHYnA==",
       "files": [
-        "lib/Nest.Watcher.dll",
-        "lib/Nest.Watcher.pdb",
-        "lib/Nest.Watcher.XML",
-        "lib/net40/Nest.Watcher.dll",
-        "lib/net40/Nest.Watcher.pdb",
-        "lib/net40/Nest.Watcher.XML",
+        "NEST.Watcher.1.0.0-beta2.nupkg",
+        "NEST.Watcher.1.0.0-beta2.nupkg.sha512",
+        "NEST.Watcher.nuspec",
         "lib/net45/Nest.Watcher.dll",
         "lib/net45/Nest.Watcher.pdb",
-        "lib/net45/Nest.Watcher.XML",
-        "NEST.Watcher.1.0.0-beta1.nupkg",
-        "NEST.Watcher.1.0.0-beta1.nupkg.sha512",
-        "NEST.Watcher.nuspec"
+        "lib/net45/Nest.Watcher.XML"
       ]
     },
     "Newtonsoft.Json/7.0.1-beta1": {
@@ -2454,7 +2448,7 @@
       "Kestrel >= 1.0.0-beta5",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta5",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta5",
-      "NEST.Watcher >= 1.0.0-beta1",
+      "NEST.Watcher >= 1.0.0-beta2",
       "Microsoft.AspNet.Mvc.Core >= 6.0.0-beta5",
       "Microsoft.Framework.Configuration >= 1.0.0-beta5",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5",
