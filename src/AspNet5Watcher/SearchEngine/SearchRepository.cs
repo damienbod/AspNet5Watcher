@@ -11,6 +11,7 @@ namespace AspNet5Watcher.SearchEngine
         private ElasticClient client;
         private const string INDEX_ALARMMESSAGE = "alarms";
         private const string TYPE_ALARMMESSAGE = "alarm";
+        private const string CRITICAL_ALARM_WATCH = "critical-alarm-watch";
 
         public SearchRepository(IConfiguration configuration)
         {           
@@ -88,7 +89,7 @@ namespace AspNet5Watcher.SearchEngine
             var header = new Dictionary<string, string>();
             header.Add("Content-Type", "application/json;charset=utf-8");
 
-            var response = client.PutWatch("critical-alarm-watch", p => p
+            var response = client.PutWatch(CRITICAL_ALARM_WATCH, p => p
                 .Trigger(t => t
                     .Schedule(s => s
                         .Interval("10s")
@@ -119,7 +120,7 @@ namespace AspNet5Watcher.SearchEngine
         }
 
         /// <summary>
-        /// no longer required
+        /// 
         /// </summary>
         private void startElasticsearchWatcherClient()
         {
@@ -133,8 +134,10 @@ namespace AspNet5Watcher.SearchEngine
 
         public async void DeleteWatcher()
         {
-            System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
-            var response = await httpClient.DeleteAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch");
+            await client.DeleteWatchAsync(new DeleteWatchRequest(CRITICAL_ALARM_WATCH));
+
+            //System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+            //var response = await httpClient.DeleteAsync("http://localhost:9200/_watcher/watch/critical-alarm-watch");
         }
     }
 }
