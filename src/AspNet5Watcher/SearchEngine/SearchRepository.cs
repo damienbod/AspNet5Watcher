@@ -88,18 +88,10 @@ namespace AspNet5Watcher.SearchEngine
             var header = new Dictionary<string, string>();
             header.Add("Content-Type", "application/json;charset=utf-8");
 
-            startElasticsearchWatcherClient();
-            return;
-
-            // TODO remove quick hack from above
-            // NEST bug WebhookAction does not work, still beta1 version, should remove the request item from the json result
-            // interval problem as well
             var response = client.PutWatch("critical-alarm-watch", p => p
                 .Trigger(t => t
                     .Schedule(s => s
-                        .Hourly(h => h
-                            .Minute(0, 20)
-                        )
+                        .Interval("10s")
                     )
                 )
                 .Input(i => i
@@ -115,20 +107,20 @@ namespace AspNet5Watcher.SearchEngine
                 .Actions(a => a.Add("webAction", 
                     new WebhookAction
                     {
-                        Request = new WatcherHttpRequest
-                        {
-                            Method = HttpMethod.Post,
-                            Host= "localhost",
-                            Port= 5000,
-                            Path= "/api/WatcherEvents/CriticalAlarm",
-                            Headers= header,
-                            Body= "\"{{ctx.payload.hits.total}}\""
-                        }
+                        Method = HttpMethod.Post,
+                        Host = "localhost",
+                        Port = 5000,
+                        Path = "/api/WatcherEvents/CriticalAlarm",
+                        Headers = header,
+                        Body = "\"{{ctx.payload.hits.total}}\""
                     }
                 ))
            );
         }
 
+        /// <summary>
+        /// no longer required
+        /// </summary>
         private void startElasticsearchWatcherClient()
         {
             System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();

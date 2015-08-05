@@ -2385,11 +2385,17 @@
       ]
     },
     "NEST.Watcher/1.0.0-beta2": {
-      "sha512": "AgllHUo1bSgTB6ATC0zERq45gvrIUOToMczhOv70J08MVQGUyeU4nxImIg/I5LdwiytJF84ISvpuqskI7PHYnA==",
+      "sha512": "rXMcbaFdaPqQ13jDueUTLp3EcWF2C10edKyWYdECsqaJhUy2RI6Xy44mW29xty/UyLwwJ53tSMYepeKJOnMTYQ==",
       "files": [
         "NEST.Watcher.1.0.0-beta2.nupkg",
         "NEST.Watcher.1.0.0-beta2.nupkg.sha512",
         "NEST.Watcher.nuspec",
+        "lib/Nest.Watcher.dll",
+        "lib/Nest.Watcher.pdb",
+        "lib/Nest.Watcher.XML",
+        "lib/net40/Nest.Watcher.dll",
+        "lib/net40/Nest.Watcher.pdb",
+        "lib/net40/Nest.Watcher.XML",
         "lib/net45/Nest.Watcher.dll",
         "lib/net45/Nest.Watcher.pdb",
         "lib/net45/Nest.Watcher.XML"
