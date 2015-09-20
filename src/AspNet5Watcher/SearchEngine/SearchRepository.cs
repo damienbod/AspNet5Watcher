@@ -15,7 +15,7 @@ namespace AspNet5Watcher.SearchEngine
 
         public SearchRepository(IConfiguration configuration)
         {           
-            var node = new Uri(configuration.Get("Development:ElasticsearchConnectionString"));
+            var node = new Uri(configuration["Development:ElasticsearchConnectionString"]);
 
             var settings = new ConnectionSettings( node,  defaultIndex: "coolsearchengine");
             settings.MapDefaultTypeIndices(d => d.Add(typeof(AlarmMessage), INDEX_ALARMMESSAGE));
