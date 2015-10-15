@@ -14,7 +14,7 @@
         "Microsoft.Framework.Runtime": "1.0.0-beta7",
         "NEST": "1.7.0",
         "Microsoft.Net.Http": "2.2.29",
-        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta7",
+        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta8-15595",
         "NEST.Watcher": "1.0.0-beta2"
     },
 
