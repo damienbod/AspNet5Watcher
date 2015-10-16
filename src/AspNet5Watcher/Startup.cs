@@ -1,27 +1,30 @@
-﻿using AspNet5Watcher.Hubs;
+﻿using AspNet5Watcher.Configurations;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Runtime;
+using Microsoft.Framework.Logging;
 
 namespace AspNet5Watcher
 {
     public class Startup
     {
-        private IConfiguration _configuration;
+        //public IConfigurationRoot Configuration { get; set; }
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
-            _configuration = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-             .AddEnvironmentVariables()
-             .AddJsonFile("config.json")
-             .Build();
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(appEnv.ApplicationBasePath)
+            //    .AddJsonFile("config.json");
+            //Configuration = builder.Build();
         }
-
+ 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
+
             services.AddMvc();
             services.AddSignalR(options =>
             {
@@ -29,13 +32,25 @@ namespace AspNet5Watcher
             });
 
             services.AddScoped<SearchRepository, SearchRepository>();
-            services.AddInstance(_configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseStaticFiles();       
-            app.UseMvc();
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+
+            app.UseIISPlatformHandler();
+
+            app.UseExceptionHandler("/Home/Error");
+
+            app.UseStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseSignalR();
         }
     }
