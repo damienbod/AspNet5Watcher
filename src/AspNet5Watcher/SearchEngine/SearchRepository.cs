@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nest;
 using Microsoft.Framework.Configuration;
+using Microsoft.Framework.OptionsModel;
 
 namespace AspNet5Watcher.SearchEngine
 {
@@ -13,11 +14,13 @@ namespace AspNet5Watcher.SearchEngine
         private const string TYPE_ALARMMESSAGE = "alarm";
         private const string CRITICAL_ALARM_WATCH = "critical-alarm-watch";
 
-        public SearchRepository(IConfiguration configuration)
-        {           
-            var node = new Uri(configuration["Development:ElasticsearchConnectionString"]);
+        private IOptions<ApplicationConfiguration> _optionsApplicationConfiguration;
 
-            var settings = new ConnectionSettings( node,  defaultIndex: "coolsearchengine");
+        public SearchRepository(IOptions<ApplicationConfiguration> o)
+        {
+            _optionsApplicationConfiguration = o;
+                     
+            var settings = new ConnectionSettings( new Uri(o.Value.ElasticsearchConnectionString),  defaultIndex: "coolsearchengine");
             settings.MapDefaultTypeIndices(d => d.Add(typeof(AlarmMessage), INDEX_ALARMMESSAGE));
             settings.MapDefaultTypeNames(d => d.Add(typeof(AlarmMessage), TYPE_ALARMMESSAGE));
 

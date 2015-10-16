@@ -4,20 +4,21 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 using Microsoft.Framework.Runtime;
 
 namespace AspNet5Watcher
 {
     public class Startup
     {
-        private IConfiguration _configuration;
+        public IConfigurationRoot Configuration { get; set; }
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
-            _configuration = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-             .AddEnvironmentVariables()
-             .AddJsonFile("config.json")
-             .Build();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("config.json");
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -29,13 +30,26 @@ namespace AspNet5Watcher
             });
 
             services.AddScoped<SearchRepository, SearchRepository>();
-            services.AddInstance(_configuration);
+            services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseStaticFiles();       
-            app.UseMvc();
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+
+            app.UseIISPlatformHandler();
+
+            app.UseExceptionHandler("/Home/Error");
+
+            app.UseStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseSignalR();
         }
     }
