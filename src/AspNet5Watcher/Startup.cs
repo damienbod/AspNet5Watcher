@@ -1,11 +1,11 @@
-﻿using AspNet5Watcher.Hubs;
+﻿using AspNet5Watcher.Configurations;
 using AspNet5Watcher.SearchEngine;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Runtime;
 
 namespace AspNet5Watcher
 {
@@ -20,17 +20,17 @@ namespace AspNet5Watcher
                 .AddJsonFile("config.json");
             Configuration = builder.Build();
         }
-
+ 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
+
             services.AddSignalR(options =>
             {
                 options.Hubs.EnableDetailedErrors = true;
             });
 
             services.AddScoped<SearchRepository, SearchRepository>();
-            services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

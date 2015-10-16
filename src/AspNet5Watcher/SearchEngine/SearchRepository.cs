@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nest;
-using Microsoft.Framework.Configuration;
 using Microsoft.Framework.OptionsModel;
+using AspNet5Watcher.Configurations;
 
 namespace AspNet5Watcher.SearchEngine
 {
