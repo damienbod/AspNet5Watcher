@@ -18,7 +18,7 @@
         "NEST.Watcher": "1.0.0-beta2"
     },
     "commands": {
-        "web": "Microsoft.AspNet.Server.Kestrel"
+        "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:17202"
     },
     "frameworks": {
         "dnx451": { }
