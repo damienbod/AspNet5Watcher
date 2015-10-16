@@ -14,12 +14,12 @@ namespace AspNet5Watcher.SearchEngine
         private const string TYPE_ALARMMESSAGE = "alarm";
         private const string CRITICAL_ALARM_WATCH = "critical-alarm-watch";
 
-        //private IOptions<ApplicationConfiguration> _optionsApplicationConfiguration;
+        private IOptions<ApplicationConfiguration> _optionsApplicationConfiguration;
 
         public SearchRepository(IOptions<ApplicationConfiguration> o)
         {
-            // _optionsApplicationConfiguration = o;
-            var uri = new Uri("http://localhost:9200");
+            _optionsApplicationConfiguration = o;
+            var uri = new Uri(_optionsApplicationConfiguration.Value.ElasticsearchConnectionString);
             var settings = new ConnectionSettings( uri,  defaultIndex: "coolsearchengine");
             settings.MapDefaultTypeIndices(d => d.Add(typeof(AlarmMessage), INDEX_ALARMMESSAGE));
             settings.MapDefaultTypeNames(d => d.Add(typeof(AlarmMessage), TYPE_ALARMMESSAGE));

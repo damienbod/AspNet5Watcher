@@ -11,19 +11,19 @@ namespace AspNet5Watcher
 {
     public class Startup
     {
-        //public IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; set; }
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
-            //var builder = new ConfigurationBuilder()
-            //    .SetBasePath(appEnv.ApplicationBasePath)
-            //    .AddJsonFile("config.json");
-            //Configuration = builder.Build();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("config.json");
+            Configuration = builder.Build();
         }
  
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
+            services.Configure<ApplicationConfiguration>(Configuration.GetSection("ApplicationConfiguration"));
 
             services.AddMvc();
             services.AddSignalR(options =>
